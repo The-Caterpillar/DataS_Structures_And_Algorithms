@@ -1,0 +1,60 @@
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) 
+    {
+        ListNode *curr = head;
+        int n = k;
+
+        ListNode *point = head,
+                 *Next = head->next,
+                 *new_head = head,
+                 *prev = NULL;
+
+        while(Next!=NULL && --n)
+        {
+            new_head->next = prev;
+            prev = new_head;
+            new_head = Next;
+            Next = Next->next;
+        } 
+        new_head->next = prev;
+
+        ListNode *temp_head = Next, *point_next = Next;
+        while(Next!=NULL)
+        {
+            // [3,2,1,5,4] = 
+            temp_head = Next;
+            point_next = temp_head;            
+            Next = Next->next;
+            prev = NULL;
+            n = k;
+
+            while(--n && temp_head->next!=NULL)
+            {
+                temp_head->next = prev;
+                prev = temp_head;
+                temp_head = Next;
+                Next = temp_head->next;
+            }
+            temp_head->next = prev;
+            point->next = temp_head;
+                if(n>0)
+                {
+                    prev = NULL;
+                    Next = temp_head->next;
+                    while(temp_head->next!=NULL)
+                    {
+                        temp_head->next = prev;
+                        prev = temp_head;
+                        temp_head = Next;
+                        Next = temp_head->next;
+                    } temp_head->next = prev;
+                    point->next = temp_head;
+                break;
+                }
+            point = point_next;
+        }
+        
+    return new_head;
+    }
+};

@@ -1,0 +1,132 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node 
+{
+    public:
+        int data;
+        node *prev;
+        node *next;
+        
+        node(int a)
+        {
+            this->data = a;
+            prev = NULL;
+            next = NULL;
+        }
+        
+        node() {} //construtor
+};
+
+class Queue{
+    
+    public:
+    
+    int size = 0;
+    node *front=NULL;
+    node *rear=NULL;
+     
+     node *enque(node *NEW)
+     {
+         size++;
+        if(rear!=NULL)
+        {
+            rear->next = NEW;
+        }
+        NEW->prev = rear;
+        rear = NEW;
+        return rear;
+     }
+     
+     node *dequeue(node *head)
+     {
+         size--;
+        if(head==NULL) 
+        {
+            cout<<endl<<
+            "\n\t Your Queue is Empty, just like your soul. Good Bye, friend!"<<endl;
+            return NULL;
+        }
+        node *temp = new node;
+        temp = head;
+        head = head->next;
+            if(head!=NULL)
+            {   head->prev = NULL;  }
+        delete temp;
+        front = head;
+        cout<<"\n\n\t Item deleted!! Just as they deleted you from their life :-("<<endl;
+     return head;
+     }
+     
+     int getSize()
+     {
+         return size;
+     }
+     int ifEmpty(node *head)
+     {
+         if(head==NULL) return true;
+        return false;
+     }
+};
+
+void print(node *head)
+{
+    cout<<"\nYour current Queue is: "<<endl;
+    if(head==NULL) 
+    {
+        cout<<"\n\n\t Your Queue is Empty, just like your soul. Good Bye, friend!"; return; 
+    }
+    node *curr = head;
+    
+    while(curr!=NULL)
+    {
+        cout<<curr->data<<" ";
+        curr = curr->next;
+    }
+}
+
+int main()
+{
+    cout<<"\nIf you wish to add an element to the Queue press 1: ";
+    bool wish; cin>>wish;
+    
+    if(wish)
+    { 
+            cout<<"\nEnter data: ";
+            int data; cin>>data;
+            node *head = new node(data);
+            node *rear = head;
+            Queue q;
+            q.enque(head);
+        
+        cout<<"\nIf you wish to add an element to the Queue press 1: ";
+        cin>>wish;
+        while(wish)
+        {
+                cout<<"\nEnter data: ";
+                cin>>data;
+                node *curr = new node(data);
+                rear = q.enque(curr);
+        
+        cout<<"\nIf you wish to add an element to the Queue press 1: ";
+        cin>>wish;
+        }
+    print(head);
+    
+        cout<<"\nIf you wish to delete an element from the Queue press 1: ";
+        cin>>wish;
+        while(wish)
+        {
+            head = q.dequeue(head);
+            
+            cout<<"\nIf you wish to delete an element from the Queue press 1: ";
+            cin>>wish;  
+        }
+        
+    print(head);
+    }
+    
+    
+cout<<"\n\n\t \nYou chose to exit, Good Bye, Friend! :-( "<<endl;
+return 0;
+}

@@ -1,0 +1,35 @@
+class Solution
+{
+    public static void sort012(int a[], int n)
+    {
+        // code here 
+        int a0=0, a1=0, a2=0;
+        
+        for(int i=0; i<n; ++i)
+        {
+            if(a[i]==0) a0++;
+            if(a[i]==1) a1++;
+            if(a[i]==2) a2++;
+        }
+        
+        int i=0;
+        a1=a1+a0;
+        a2=a2+a1;
+        
+        while(i<a0)
+        {
+            a[i]=0;
+            i++;
+        }
+        while(i<a1)
+        {
+            a[i]=1;
+            i++;
+        }
+        while(i<a2)
+        {
+            a[i]=2;
+            i++;
+        }
+    }
+}

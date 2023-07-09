@@ -1,0 +1,97 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Queue
+{
+    int data;
+    int front;
+    int back;
+    int capacity;
+    int *arr;
+    
+    public:
+    Queue(int capacity)
+    {
+        front = -1;
+        back = -1;
+        this->capacity = capacity;
+        arr = new int[capacity];
+        cout<<endl<<"Queue of desired size created!!"<<endl;
+    }
+    
+    void push(int data)
+    {
+        if(back == capacity-1)
+        {
+            cout<<endl<<"Queue overflow!!"<<endl;
+        }
+        else
+        {
+            if(front==-1)
+            {
+                front++;
+                back++;
+            }
+            else
+            {
+                back++;
+            }
+            arr[back] = data;
+        }
+    }
+    void pop()
+    {
+        if(front>back || back==-1)
+        {
+            cout<<endl<<"Queue is empty"<<endl;
+            return;
+        }
+        front++;
+    }
+    int peek()
+    {
+        if(front>back || back==-1)
+        {
+            cout<<endl<<"Queue is empty"<<endl;
+            return -1;
+        }
+        return arr[front];
+    }
+    
+    void display()
+    {
+        cout<<endl;
+        for(int i=front; i<=back; ++i)
+        {
+            cout<<arr[i]<<" ";
+        }
+        cout<<endl;
+    }
+};
+
+int main()
+{
+    cout<<"Enter the size: ";
+    int size; cin>>size;
+    
+    Queue q(size);
+    
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.push(4);
+    q.push(5);
+    q.push(6);
+    
+    q.display();
+    
+    cout<<endl<<q.peek()<<endl;
+    q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+    
+return 0;
+}

@@ -1,0 +1,30 @@
+bool findRedundantBrackets(string &s)
+{
+    // (a+c*b)+(c))
+    stack<char> st;
+    bool check = false;
+
+    for(auto i:s)
+    {
+        if(i==')')
+        {
+            if(st.size()==0 || st.top()=='(')
+                { check = true; break; }
+            else
+            {
+                while(st.size()!=0 && st.top()!='(')
+                {
+                    st.pop();
+                }
+                if(st.size()==0 || st.top()!='(') 
+                { check = true; break; }
+                else st.pop();
+            }
+        }
+        else if(i=='+' || i=='-' || i=='/' || i=='*' || i=='(')
+        {
+            st.push(i);
+        }
+    }
+return check;
+}

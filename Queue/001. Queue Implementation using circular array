@@ -1,0 +1,87 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+// Circular array implementation
+class Queue
+{
+    int capacity;
+    int *arr;
+    int front = -1;
+    int rear = -1;
+    int size = 0;
+    
+    public:
+    Queue(int capacity)
+    {
+        arr = new int[capacity];
+        cout<<endl<<"Queue created"<<endl;
+        this->capacity = capacity;
+        front = 0; rear = 0;
+    }
+    
+    int getFront()
+    {
+        if(isEmpty())
+        {
+            return -1;
+        }
+        else return front;
+    }
+    
+    int getRear()
+    {
+        if(isEmpty()) return -1;
+    return (front+size-1)%capacity;
+    }
+    
+    void enqueue(int x)
+    {
+        if(isFull())
+        {
+            cout<<"Queue Overflow!!"<<endl;
+            return;
+        }
+        int rear = getRear();
+        rear = (rear+1)%capacity;
+        arr[rear] = x;
+        size++;
+    }
+    int dequeue()
+    {
+        if(isEmpty()) { cout<<"Empty list"<<endl; return -1; }
+        int a = arr[front];
+        front = (front+1)%capacity;
+        size--;
+    return a;
+    }
+    
+    bool isFull()
+    {
+        if(size==capacity) return true; else return false;
+    }
+    bool isEmpty()
+    {
+        if(size==0) return true; else return false;
+    }
+};
+
+int main()
+{
+    int n; cin>>n;
+    Queue q1(n);
+    
+    for(int i=0; i<n; ++i)
+    {
+        int x; cin>>x;
+        q1.enqueue(x);
+    }
+    
+    for(int i=0; i<n; ++i)
+    {
+        int x = q1.dequeue();
+        cout<<x<<" ";
+    }
+    
+return 0;
+}

@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+stack<int> s; // stack
+int minimum = INT_MAX;
+
+void Spush(int a)
+{
+    if(s.size()==0)
+    {
+        minimum = a;
+        s.push(a);
+    }
+    else
+    {
+        if(a<=minimum)
+        {
+            int x = 2*a-minimum;
+            s.push(x);
+            minimum = a;
+        }
+        else 
+        {
+            s.push(a);
+        }
+    }
+return;
+}
+
+int Spop()
+{
+    if(s.size()==0) return -1;
+    
+    int ans;
+    if(s.top()<minimum)
+    {
+        ans = minimum;
+        minimum = 2*minimum-s.top();
+        s.pop();
+    }
+    else
+    {
+        ans = s.top();
+        s.pop();
+    }
+
+return ans;
+}
+
+int getmin()
+{
+    if(s.size()==0) return -1;
+    else return minimum;
+}
+
+int main()
+{
+    Spush(5);
+    Spush(4);
+    Spush(3);
+    Spush(2); 
+    Spush(1);
+    
+    std::cout << getmin() << std::endl;
+    Spop();
+    std::cout << getmin() << std::endl;
+     Spop();
+    std::cout << getmin() << std::endl;
+     Spop();
+    std::cout << getmin() << std::endl;
+     Spop();
+    std::cout << getmin() << std::endl;
+     Spop();
+    std::cout << getmin() << std::endl;
+     Spop();
+    std::cout << getmin() << std::endl;
+    
+return 0;
+}

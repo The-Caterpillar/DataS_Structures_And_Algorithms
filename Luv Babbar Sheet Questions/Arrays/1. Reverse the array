@@ -1,0 +1,13 @@
+/* Brute Force approach: Create a new array and copy all elements of original array in the new array in a reverse order.*/
+
+//A more Optimised Approach: 
+
+void reverse(int arr)
+{
+    for(int i=0; i<arr.size()/2; ++i)
+    {
+        int temp = arr[i];
+        arr[i] = arr[arr.length()-i-1];
+        arr[arr.length()-i-1] = temp;
+    }
+}

@@ -1,0 +1,43 @@
+// With extra parameter
+
+#include <bits/stdc++.h>
+using namespace std;
+
+long print(long n, long sum)
+{
+    if(n>0)
+    {
+        sum = sum + n;
+        return print(n-1, sum);
+    }
+    else return sum;
+}
+
+int main()
+{
+    long n; cin>>n;
+    
+    cout<<print(n, 0)<<endl;
+    
+    return 0;
+}
+
+
+// With extra parameter
+#include <bits/stdc++.h>
+using namespace std;
+
+long print(long n)
+{
+    if(n==0) return n;
+    return n + print(n-1);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+}
+
+int main()
+{
+    long n; cin>>n;
+    
+    cout<<print(n)<<endl;
+    
+    return 0;
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          

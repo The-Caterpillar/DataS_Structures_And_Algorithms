@@ -1,0 +1,46 @@
+int celebrity(vector<vector<int> >& M, int n) 
+    {
+        stack<int> people;
+        
+        for(int i=0; i<n; ++i)
+        {
+            people.push(i);
+        }
+        
+        while(people.size()>1)
+        {
+            int a = people.top();
+            people.pop();
+            int b = people.top();
+            people.pop();
+            
+            if(M[a][b]!=1)
+            {
+                people.push(a);
+            }
+            else people.push(b);
+        } int candidate = people.top();
+        
+        bool check = true;
+        for(int i=0; i<n; ++i)
+        {
+            if(M[candidate][i]!=0) 
+                { check = false; break; }
+        }
+        
+        if(check)
+        for(int i=0; i<n; ++i)
+        {
+            if(M[i][candidate]!=1)
+            {
+                if(i!=candidate) 
+                {
+                    check = false; break;
+                }
+            }
+        }
+        
+        if(check) return candidate;
+        
+    return -1;
+    }

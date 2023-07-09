@@ -1,0 +1,46 @@
+// OPTIMIZED
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    cout<<endl<<"\t\t --CODE FOR NEAREST GREATER ELEMENT TO THE LEFT--"<<endl;
+    
+    vector<int> v;   
+    stack<int> S;
+    
+    // Creating an array
+    cout<<"Number of elements in array: ";
+    int n;   cin>>n;   int a[n];
+    cout<<"Enter the elements: ";
+    for(int i=0; i<n; ++i)  cin>>a[i];
+    // Array created
+    
+    if(n>0)
+    {
+        for(int i=0; i<n; ++i)
+        {
+            if(S.size()==0) v.push_back(-1);
+            
+            else
+            {
+                if( S.top() > a[i] )
+                {  v.push_back(S.top()); }
+                else
+                {
+                    while(S.size()>0 && S.top()<=a[i])
+                    {   S.pop();    }
+                    
+                    if(S.size()==0) v.push_back(-1);
+                    
+                    else v.push_back(S.top());
+                }
+            }
+            S.push(a[i]);
+        }
+    }
+    
+    for(int i=0; i<n; ++i) 
+        cout<<v[i]<<" "; cout<<endl;
+return 0;
+}

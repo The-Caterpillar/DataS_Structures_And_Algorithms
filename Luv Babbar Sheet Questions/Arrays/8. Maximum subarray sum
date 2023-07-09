@@ -1,0 +1,34 @@
+// Brute Force:
+/*
+ long long maxSubarraySum(int arr[], int n)
+    {    // Your code here
+        long long max=arr[0];
+        for(int i=0; i<n; ++i)
+        {
+          long long sum=0;
+          for(int j=i; j<n; ++j)
+          {
+            sum = sum + arr[j];
+            if(sum>max) max=sum;
+          }
+        }
+    return max; 
+    }
+*/
+
+
+
+// Optimised:
+long long maxSubarraySum(int arr[], int n)
+    {    // Your code here
+    
+        long long sum  = 0, max = arr[0];
+        for(int i=0; i<n; ++i)
+        {
+            sum = sum + arr[i];
+            
+            if(sum>max) max = sum;
+            if(sum<0) sum=0;
+        }
+    return max;
+    }

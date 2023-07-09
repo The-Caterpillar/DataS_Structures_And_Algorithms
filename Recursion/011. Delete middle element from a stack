@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+std::stack<int> s;
+
+void delete_middle(int n)
+{
+    if(n==1) { s.pop(); return; }
+    
+    int a = s.top(); s.pop();
+    delete_middle(n-1);
+    
+    s.push(a);
+}
+
+int main()
+{
+    int n; cin>>n;
+    while(n--)
+    {
+        int a; cin>>a;
+        s.push(a);
+    }
+    
+    delete_middle(s.size()/2+1);
+    
+    while(s.size()>0)
+    {
+        std::cout << s.top() << " ";
+        s.pop();
+    }
+return 0;
+}

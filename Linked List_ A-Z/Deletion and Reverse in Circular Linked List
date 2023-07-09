@@ -1,0 +1,58 @@
+/* structure for a node 
+struct Node
+{
+	int data;
+	struct Node *next;
+};
+*/
+
+/* Function to delete a given node from the list */
+void deleteNode(struct Node **head, int key)
+{
+    if(*head==NULL) return;
+    if((*head)-> next == *head) return;
+
+    Node *curr = *head;
+    while(curr)
+    {
+        if(curr->next->data == key)
+        {
+            curr->next = curr->next->next;
+            return;
+        }
+    curr = curr->next;
+    }
+}
+
+/* Function to reverse the linked list */
+Node *rev(Node *head)
+{
+    if(head==NULL) return NULL;
+    if(head->next == head) return head;
+    
+    Node *prev = NULL,
+         *Next = head->next,
+         *new_head = head;
+    
+    while(new_head->next!=head)
+    {
+        new_head->next = prev;
+        prev = new_head;
+        new_head = Next;
+        Next = Next->next;
+    } 
+    new_head->next = prev;
+    
+return new_head;
+}
+
+// Function to reverse the linked list
+void reverse(struct Node **head_ref)
+{
+    if(*head_ref == NULL) 
+        return;
+
+    Node *head = *head_ref;
+    *head_ref = rev(head);
+    head->next = *head_ref;
+}

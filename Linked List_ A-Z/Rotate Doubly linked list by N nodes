@@ -1,0 +1,87 @@
+#include <iostream>
+using namespace std;
+
+class node
+{
+    public:
+    
+    int data;
+    node *next=NULL;
+    node *prev=NULL;
+    node(int data)
+    {
+        this->data = data;
+    }
+    node() { data=0; }
+};
+
+node *addNode(node *head)
+{
+    int data; cin>>data;
+    node *New = new node(data);
+    
+    head->next = New;
+    New->prev = head;
+    
+return New;
+}
+
+node *rotateByN(node *head)
+{ //      1 <-> 2 <-> 3 <-> 4
+    if(head==NULL) return NULL;
+    if(head->next == NULL) return NULL;
+// Counting the number of nodes in the list
+    int count = 0; 
+    node *curr = head;
+    while(curr!=NULL)
+    {
+        count++;
+        curr = curr->next;
+    }
+    
+    cout<<"How many shifts? ";
+    int n; cin>>n;
+    n = n%count;
+    
+    curr = head;
+    while(n--)
+    {
+        curr = curr->next;
+    }
+    // 1 2 3 4 5
+    node *new_head = curr;
+    new_head->prev = NULL;
+    
+    curr = new_head;
+    while(curr->next!=NULL) curr = curr->next;
+    curr->next = head;
+    
+    curr = head;
+    while(curr->next != new_head) curr = curr->next;
+    curr->next = NULL;
+return new_head;
+}
+
+int main()
+{
+    int n; cin>>n;
+    
+    int data; cin>>data;
+    node *head = new node(data);
+    
+    node *tail = head;
+    
+    while(--n)
+    {
+        tail = addNode(tail);
+    }
+    
+
+    node *curr = rotateByN(head);
+    while(curr!=NULL)
+    {
+        std::cout << curr->data << " ";
+        curr = curr->next;
+    }
+return 0;
+}

@@ -1,0 +1,18 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+long print(long n)
+{
+    if(n==0) return 1;
+    
+    return n * print(n-1); 
+}
+
+int main()
+{
+    long n; cin>>n;
+    
+    cout<<print(n)<<endl;
+    
+    return 0;
+}

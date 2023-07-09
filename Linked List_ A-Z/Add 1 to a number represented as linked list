@@ -1,0 +1,77 @@
+class Solution
+{
+    public: // 9 9 9
+    
+    // To reverse the list
+    Node *reverse(Node *head)
+    {
+        if(head==NULL) return NULL;
+        if(head->next==NULL) return head;
+        
+        Node *prev = NULL,
+             *Next = head->next,
+             *new_head = head;
+        while(new_head->next!=NULL)
+        {
+            new_head->next = prev;
+            prev = new_head;
+            new_head = Next;
+            Next = Next->next;
+        }
+        new_head->next = prev;
+    return new_head;
+    }
+    
+    // Addition Function
+    Node* addOne(Node *head) 
+    {
+        if(head==NULL) head->data = 1;
+
+        else
+        {
+            Node *curr = head;
+            
+            while(curr->next!=NULL)
+            {    curr = curr->next; }
+            if(curr->data!=9)
+            {
+                curr->data = curr->data + 1;
+            }
+            else
+            {
+                bool plus_one = true;
+                head = reverse(head);
+                curr = head;
+                
+                Node *Temp;
+                while(curr!=NULL)
+                {  
+                    if(plus_one)
+                    {
+                        if(curr->data == 9)
+                        {
+                            curr->data = 0;
+                            plus_one = true;
+                        }
+                        else 
+                        {
+                            curr->data+=1;
+                            plus_one = false;
+                            break;
+                        }
+                    }
+                Temp = curr;
+                curr = curr->next;
+                }
+                if(curr==NULL && plus_one)
+                {
+                    Node *n = new Node(1);
+                    Temp->next = n;
+                }
+                head = reverse(head);
+            }
+        }
+        
+    return head;
+    }
+};

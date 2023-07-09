@@ -1,0 +1,30 @@
+#include <bits/stdc++.h> 
+void interLeaveQueue(queue < int > & q) 
+{
+    // Write your code here.
+    queue < int > q1;
+    queue < int > q2;
+    int m  = q.size(); 
+    int n  = m / 2;
+
+    while(n--)
+    {
+        int a = q.front();
+        q.pop(); q1.push(a);
+    }
+
+    n  = m / 2;
+    while(n--)
+    {
+        int a = q.front();
+        q.pop(); q2.push(a);
+    }
+
+    n = m/2;
+    while(n--)
+    {
+        q.push(q1.front());
+        q.push(q2.front());
+        q1.pop(); q2.pop();
+    }
+}

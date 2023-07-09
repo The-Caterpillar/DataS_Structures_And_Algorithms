@@ -1,0 +1,70 @@
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+
+class Solution
+{
+    public:
+    //Function to check if brackets are balanced or not.
+    bool ispar(string x)
+    {
+        // Your code here
+        vector<char> v;
+        int l = x.length();
+        
+        for(int i=0; i<l; ++i)
+        {
+            if(x[i]=='{' || x[i]=='[' || x[i]=='(')
+            {
+                v.push_back(x[i]);
+            }
+            else
+            {
+                if(v.empty()) return false;
+                if(x[i]=='}')
+                {
+                    if(v.back() == '{')
+                    { v.pop_back(); }
+                    else { return false; }
+                }
+                else if(x[i]==']')
+                {
+                    if(v.back() == '[')
+                    { v.pop_back(); }
+                    else { return false; }
+                }
+                else if(x[i]==')')
+                {
+                    if(v.back() == '(')
+                    { v.pop_back(); }
+                    else { return false; }
+                }
+            }
+        }
+        if(!v.empty()) return false;
+    return true;
+    }
+
+};
+
+//{ Driver Code Starts.
+
+int main()
+{
+   int t;
+   string a;
+   cin>>t;
+   while(t--)
+   {
+       cin>>a;
+       Solution obj;
+       if(obj.ispar(a))
+        cout<<"balanced"<<endl;
+       else
+        cout<<"not balanced"<<endl;
+   }
+}
+// } Driver Code Ends

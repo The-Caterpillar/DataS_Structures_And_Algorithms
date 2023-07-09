@@ -1,0 +1,19 @@
+/*
+
+If you see a code with nested loop and the inner loop variable depends on the outer loop variable, the question can be done via stack
+
+Any variations of:
+
+1. 
+for(int i=0; i<n; ++i)
+{
+  for(int j=i; j<n; ++j)
+  {}
+}
+
+2. for(int i=0; i<n; ++i)
+        {
+          for(int j=0; j<i; ++j)
+          {}
+        }
+        

@@ -1,0 +1,139 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Stack
+{
+    int capacity;
+    int top=-1;
+    int data;
+    int *arr;
+    
+    public:
+    Stack() {} // default constructor
+
+    Stack(int capacity)
+    {
+        this->capacity = capacity;
+        arr = new int[capacity];
+        cout<<"\n Stack of "<<capacity<<" created!!"<<endl;
+    }
+    
+    void push(int data)
+    {
+        if(top == capacity-1)
+        {
+            cout<<endl<<"Stack Overflow!!"<<endl;
+            return;
+        }
+    
+        top++;
+        arr[top] = data;
+        cout<<endl<<"Element successfully pushed into the stack!!"<<endl;
+    }
+    
+    int pop()
+    {
+        if(top == -1)
+        {
+            cout<<"Stack underflow!!"<<endl;
+        return -1;
+        }
+        else 
+        {
+            int x = arr[top];
+            top--; return x;
+        }
+    }
+    
+    int peek()
+    {
+        if(top == -1)
+        {
+            cout<<"Stack underflow!!"<<endl;
+        return 0;
+        }
+        return arr[top];
+    }
+    
+    bool IsEmpty()
+    {
+        if(top==-1) return 1;
+        else return 0;
+    }
+    
+    bool IsFull()
+    {
+        if(top == capacity-1) return true;
+        else return false;
+    }
+    
+    int size()
+    {
+        return capacity;
+    }
+    
+    void Display()
+    {
+        cout<<endl<<"Elements are: ";
+        for(int i=0; i<=top; ++i) cout<<arr[i]<<" ";
+        cout<<endl;
+    }
+};
+
+int main()
+{
+    cout<<"Enter the size of your stack: ";
+    int size; cin>>size;
+    Stack s(size);
+    
+    int ch=1;
+    
+    while(ch)
+    {
+        
+        cout<<endl<<"\n Enter a choice: "
+                    "\n 1. Push \t2. Pop \t3. Display \t4. Peek"
+                    "\n 5. Check size of stack \t6. Check if stack is full"
+                    "\n 7. Check if stack is empty \t8. Exit"<<endl;
+        int choice; cin>>choice;
+        
+        switch(choice)
+        {
+            case 1 : cout<<endl<<"Enter a value to push: ";
+                    int val; cin>>val;
+                    s.push(val);
+                    break;
+            
+            case 2 : cout<<endl<<"Item popped: "<<s.pop()<<endl;
+                    break;
+                    
+            case 3 : s.Display();
+                    break;
+                    
+            case 4: cout<<endl<<"The top element is: "<<s.peek()<<endl;
+                    break;
+            
+            case 5: cout<<endl<<"Size of stack is: "<<s.size()<<endl;
+                    break;
+            
+            case 6: {
+                        bool check = s.IsFull();
+                        if(check) cout<<endl<<"Stack Full!!"<<endl;
+                        else cout<<endl<<"Stack is not Full!!"<<endl;
+                    }   
+                    break;
+            
+            case 7: {
+                        bool check = s.IsEmpty();
+                        if(check) cout<<endl<<"Stack Empty!!"<<endl;
+                        else cout<<endl<<"Stack is not Empty"<<endl;
+                    }
+                    break;
+                    
+            default: cout<<endl<<"Exittinggg...";
+                     break;
+        }
+    cout<<"Enter 0 to exit, any other digit to continue: "; cin>>ch;
+    }
+return 0;
+}

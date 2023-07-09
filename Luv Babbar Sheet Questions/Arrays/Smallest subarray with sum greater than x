@@ -1,0 +1,52 @@
+// Naive code:
+int smallestSubWithSum(int arr[], int n, int x)
+    {
+        int ans = n;
+        // 8 10
+        // 1 3 4 7 10 10 8 10
+        for(int i=0; i<n; ++i)
+        {
+            long long sum = 0;
+            int count = 0;
+            for(int j=i; j<n; ++j)
+            {
+                count++;
+                sum = sum + arr[j];
+                if(sum>x)
+                {
+                    if(count<ans) 
+                    {
+                        ans = count;
+                    }
+                    break;
+                }
+            }
+        }
+    return ans;
+    }
+
+
+// OPTIMISED SOLUTION:
+
+int smallestSubWithSum(int arr[], int n, int x)
+    {
+
+        int ans = n+1, count = 0;
+        long long curr_sum = 0;
+        // 8 10
+        // 1 3 4 7 10 10 8 10  
+        for(int i=0, j=0; i<n; ++i)
+        {
+            count++;
+            curr_sum = curr_sum + arr[i];
+            
+            while(curr_sum>x)
+            {
+                if(count<ans) ans = count;
+                curr_sum = curr_sum - arr[j];
+                j++; count--; // 3
+            }
+        }
+        
+    return ans;
+    }

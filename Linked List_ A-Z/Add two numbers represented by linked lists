@@ -1,0 +1,100 @@
+class Solution
+{
+    public:
+    Node *reverse(Node *head)
+    {
+        if(head==NULL) return NULL;
+        if(head->next==NULL) return head;
+        
+        Node *prev = NULL,
+             *new_head = head,
+             *Next = head->next;
+        
+        while(new_head->next!=NULL)
+        {
+            new_head->next = prev;
+            prev = new_head;
+            new_head = Next;
+            Next = Next->next;
+        } new_head->next = prev;
+        
+    return new_head;
+    }
+
+    //Function to add two numbers represented by linked list.
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        if(first==NULL) return second;
+        if(second==NULL) return first;
+        
+        Node *curr1 = first, *curr2 = second, *result=first, *curr=first;
+        
+        first = reverse(first);
+        second = reverse(second);
+        
+            int a = first->data,
+                b = second->data;
+            int sum = a+b, carry = 0;
+            
+            curr1 = first->next;
+            curr2 = second->next;
+            
+            carry = sum/10;
+            Node *New = new Node(sum%10);
+            result = New;
+            curr = result;
+
+        while(curr1!=NULL && curr2!=NULL)
+        {
+            a = curr1->data;
+            b = curr2->data;
+            sum = a+b;
+            if(carry) sum = sum+carry;
+
+            carry = sum/10;
+            Node *New = new Node(sum%10);
+            curr->next = New;
+            curr = New;
+                
+        curr1 = curr1->next;
+        curr2 = curr2->next;
+        }
+        
+        while(curr2!=NULL)
+        {
+            b = curr2->data;
+            if(carry) sum = carry+b;
+            else sum = b;
+            
+            carry = sum/10;
+            Node *New = new Node(sum%10);
+            curr->next = New;
+            curr = New;
+            
+        curr2 = curr2->next;
+        }
+        
+        while(curr1!=NULL)
+        {
+            a = curr1->data;
+            if(carry) sum = carry+a;
+            else sum = a;
+            
+            carry = sum/10;
+            Node *New = new Node(sum%10);
+            curr->next = New;
+            curr = New;
+            
+        curr1 = curr1->next;
+        }
+        
+    if(carry)
+    {
+        Node *New = new Node(carry);
+        curr->next = New;
+    }
+    result = reverse(result);
+    
+    return result;
+    }
+};

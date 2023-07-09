@@ -1,0 +1,50 @@
+/* Brute force: Run two nested loops, check if each element of array a exists in array b, if yes, mark the element in array b as -1. afterwards count all non -1
+ elements in the arrays  Time Complexity- O(n^2), Space Complexity- O(1)
+
+int doUnion(int a[], int n, int b[], int m)  
+    {
+        int count = 1;
+        
+        for(int i=1; i<n; ++i)
+        {
+            if(a[i]==a[i-1]) 
+                a[i-1]=-1; 
+            else count++;
+        }
+        
+        for(int i=0; i<n; ++i)
+        {
+            if(a[i]!=-1)
+            {
+                for(int j=0; j<m; ++j)
+                {
+                    if(a[i]==b[j]) 
+                        { b[j]=-1; }
+                }
+            }
+        }
+     
+        for(int j=0; j<m; ++j)
+        {
+            if(b[j]!=-1) count++;
+        }
+    return count;
+    } */
+
+// Optimized approach - Use either unordered set OR map
+// Time Complexity- O(n), Space Complexity- O((n+m)log(n+m))
+int doUnion(int a[], int n, int b[], int m)  
+    {
+        //code here
+        map<int,int> z;
+        
+        for(int i=0; i<n; ++i)
+        {
+            z[a[i]]=1;
+        }
+        for(int i=0; i<m; ++i)
+        {
+            z[b[i]]=1;
+        }
+    return z.size();
+    }

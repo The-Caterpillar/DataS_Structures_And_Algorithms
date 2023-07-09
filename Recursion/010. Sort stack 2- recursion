@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+std::stack<int> s;
+
+void insert(int x)
+{
+    if(s.size()==0 || s.top()<=x)
+    {
+        s.push(x);
+        return;
+    }
+    
+    int a = s.top();
+    s.pop();
+    insert(x);
+    
+    s.push(a);
+}
+
+void sort()
+{
+    if(s.size()<=0) return;
+    
+    int x = s.top();
+    s.pop();
+    
+    sort();
+    
+    insert(x);
+}
+
+int main()
+{
+    int n; cin>>n;
+    while(n--)
+    {
+        int a; cin>>a;
+        s.push(a);
+    }
+    
+    sort();
+    while(s.size()>0)
+    {
+        std::cout << s.top() << " ";
+        s.pop();
+    }
+return 0;
+}

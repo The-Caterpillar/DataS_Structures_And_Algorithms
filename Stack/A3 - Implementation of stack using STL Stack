@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    
+    stack<int> s;
+    
+    s.push(3);
+    s.push(1);
+    s.push(2);
+    
+    cout<<s.top()<<endl; // Output = int32_t
+    
+    s.pop(); // deletes top element, ie. 2 here
+    
+    cout<<s.empty()<<endl; // If stack is empty, output = 1, else output = 0
+    
+    cout<<s.size()<<endl; // Size of stack
+    
+    stack<int> t;
+    t.push(9);
+    
+    s.swap(t); // Swaps values of stack t with stack s
+    
+    s.emplace(10); // adds 10 to s;    
+
+return 0;
+}

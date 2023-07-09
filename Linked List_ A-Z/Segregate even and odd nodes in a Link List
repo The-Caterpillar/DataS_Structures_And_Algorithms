@@ -1,0 +1,40 @@
+class Solution{
+public:
+    Node* divide(int N, Node *head)
+    {
+        Node *even_head = new Node(0);
+        Node *curr = head, *even_curr = even_head;
+        
+        while(curr->next!=NULL)
+        {
+            if(curr->next->data %2 == 0)
+            {
+                even_curr->next = curr->next;
+                curr->next = curr->next->next;
+                even_curr = even_curr->next;
+            }
+            else curr = curr->next;
+        }
+        
+    if(head->data%2==0)
+    {    
+        int temp = head->data;
+        head = head->next;
+        even_head->data = temp;
+        
+        if(even_head!=NULL)
+        {
+            even_curr->next = head;
+            return even_head;
+        }
+    }
+    
+    even_head = even_head->next;
+    if(even_head!=NULL)
+    {
+        even_curr->next = head;
+        return even_head;
+    }
+    return head;
+    }
+};

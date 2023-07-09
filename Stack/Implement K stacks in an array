@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class MyStack
+{
+    int *arr;
+    int *next;
+    int *tops;
+    int freeTop;
+    int capacity;
+    int k;
+    
+    public:
+    MyStack(int size, int k)
+    {
+        capacity = size;
+        this->k = k;
+        arr = new int[capacity];
+        next = new int[capacity];
+        tops = new int[k];
+        
+        for(int i=0; i<k; ++i) // Initially no stack exist, hence no tops for stack hence all=-1
+        {
+            tops[i] = -1;
+        }
+        
+        for(int i=0; i<size-1; ++i) // Initially all positions in array avaialable hence all=i+1
+        {
+            next[i] = i+1; // each position connected to next position
+        } next[size-1] = -1; // last position not connected to anyone hence -1
+        freeTop = 0; // points to the first free top
+    }
+    
+    
+    void push(int x, int Sn) // x = data to be pushed. Sn = stack number
+    {
+        int i = freeTop; // Data will be pushed to the first free top avaialable
+        freeTop = next[i]; // freeTop updated, since previous one will get used now
+        next[i] = tops[Sn]; // next[i] will be connected to previous element now (for stack purposes)
+        tops[Sn] = i; // Stack top value updated
+        arr[i] = x; // data pushed into the array
+    }
+    
+    int pop(int Sn) // Sn = From which Stack do you wanna pop the item
+    {
+        int top = tops[Sn]; // top of the Stack recieved
+        tops[Sn] = next[top];
+        next[top] = freeTop;
+        freeTop = top;
+        int data = arr[top]; // data from top of stack retrieved
+        return data;
+    }
+};
+
+int main()
+{
+    MyStack m(100,5);
+    
+    m.push(1,0);
+    m.push(2,0);
+    m.push(3,0);
+    m.push(4,0);
+    m.push(5,0);
+    
+    m.push(10,1);
+    m.push(12,1);
+    m.push(13,1);
+    m.push(14,1);
+    m.push(15,1);
+    
+    cout<<m.pop(0)<<" "<<m.pop(1)<<endl;
+    cout<<m.pop(0)<<" "<<m.pop(1)<<endl;
+    cout<<m.pop(0)<<" "<<m.pop(1)<<endl;
+    cout<<m.pop(0)<<" "<<m.pop(1)<<endl;
+    cout<<m.pop(0)<<" "<<m.pop(1)<<endl;
+    
+    return 0;
+}

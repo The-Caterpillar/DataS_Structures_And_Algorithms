@@ -1,0 +1,29 @@
+// Naive Solution- Create a vector, push all the elements of the list in this vector. Create a new linked list from this vector in reverse order
+
+// Efficient Solution- Keep swapping where every node points to in the list
+
+Node* reverseList(struct Node *head)
+    {
+        // code here
+        // return head of reversed list
+        
+        // 6
+        // 1 2 3 4 5 6
+        
+        if(head==NULL) return NULL;
+        if(head->next==NULL) return head;
+        
+        Node *new_head = head, 
+             *NEXT = head->next,
+             *prev = NULL;
+        
+        while(new_head->next!=NULL)
+        {
+            new_head->next = prev;
+            prev = new_head;
+            new_head = NEXT;
+            NEXT = new_head->next;
+        }
+        new_head->next=prev;
+    return new_head;
+    }

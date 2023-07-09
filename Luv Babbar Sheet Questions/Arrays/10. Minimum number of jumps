@@ -1,0 +1,37 @@
+ int minJumps(int arr[], int n)
+    {
+        if(n==1) return 0;
+        if(arr[0]>=n-1) return 1;
+        
+        int jumps = 0;
+        
+        for(int i=0; i<n-1; ++i)
+        {
+            int next = i, k=i+1, a=arr[i];
+            
+            if(a==0) return -1;
+            else if(a+i>=n-1) { jumps++; break; }
+            else
+            {
+                int max=0,j=0;
+                while(j<a && k<n)
+                {
+                    if(arr[k]+k>max)
+                    {
+                        max = arr[k]+k;
+                        next = k;
+                        if(arr[k]+k>=n-1)
+                        {
+                            next = k;
+                            break;
+                        }
+                    }
+                k++;
+                j++;
+                }
+            i = next-1;
+            }
+            jumps++;
+        }
+    return jumps;
+    }

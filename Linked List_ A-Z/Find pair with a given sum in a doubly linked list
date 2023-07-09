@@ -1,0 +1,21 @@
+bool findPair(Node* head, int k)
+{
+    // First pointer points to the head and will move forward, \
+    // Last is pointer to the last node and will move backwards
+    
+    Node *first = head, *curr = head;
+
+    while(curr->next != NULL)
+    {curr = curr->next;}
+    Node *last = curr;
+
+    while(first!=last)
+    {
+        long sum = first->data + last->data;
+        if(sum == k) return true;
+
+        if(sum<k) first = first->next;
+        if(sum>k) last = last->prev;
+    }
+return false;
+}

@@ -1,0 +1,31 @@
+/*The structure of the class is
+class SortedStack{
+public:
+	stack<int> s;
+	void sort();
+};
+*/
+
+/* The below method sorts the stack s 
+you are required to complete the below method */
+
+void insert(stack<int> &s, int x)
+{
+    if(s.size()==0) { s.push(x); return; }
+    else if( s.top()<=x ) { s.push(x); return; }
+
+    int a = s.top(); s.pop();
+    insert(s,x);
+    s.push(a);
+}
+
+void SortedStack :: sort()
+{
+   //Your code here
+   if(s.size()==0) return;
+   
+   int a = s.top(); s.pop();
+   sort();
+   
+   insert(s,a);
+}

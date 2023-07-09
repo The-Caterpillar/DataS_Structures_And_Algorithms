@@ -1,0 +1,16 @@
+stack<int> pushAtBottom(stack<int>& s, int x) 
+{
+    // Write your code here.
+    if (s.size() == 0)
+    {
+      s.push(x);
+      return s;
+    }
+
+    int a = s.top();
+    s.pop();
+
+    pushAtBottom(s,x);
+    s.push(a);
+return s;
+}

@@ -1,0 +1,17 @@
+class Solution
+{
+   public:
+    int findSum(int A[], int N)
+    {
+    	//code here.
+    	int mi = A[0], ma = A[0];
+    	
+    	for(int i=0; i<N; ++i)
+    	{
+    	    ma = max(ma,A[i]);
+    	    mi = min(mi,A[i]);
+    	}
+    return ma+mi;
+    }
+
+};
