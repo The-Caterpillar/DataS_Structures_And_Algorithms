@@ -18,12 +18,36 @@ class Node
 Node(){} // Default Constructor
 };
 
-// O(N)
-int size(Node *root)
+int  height(Node *root)
 {
     if(root==NULL) return 0;
+    return max(height(root->left),height(root->right)) +1;
+}
 
-    return 1 + size(root->left) + size(root->right);
+void printLevel(Node *root, int level)
+{
+    if(root==NULL) return;
+
+    if(level==0)
+    {
+        cout<<root->key<<" ";
+    }
+    else
+    {
+        printLevel(root->left,level-1);
+        printLevel(root->right,level-1);
+    }
+}
+
+void LTraversal(Node *root)
+{
+    int h =  height(root);
+    cout<<"Height of tree = "<<h<<endl<<endl;
+    for(int i=0; i<h; ++i)
+    {
+        printLevel(root,i);
+        cout<<endl;
+    }
 }
 int main()
 {
@@ -38,7 +62,7 @@ int main()
     cin>>data; root->right->left = new Node(data);
     cin>>data; root->right->right = new Node(data);
 
-    cout<<"Size: "<<size(root)<<endl;
+    LTraversal(root);
 
 return 0;
 }

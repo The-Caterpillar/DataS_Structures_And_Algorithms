@@ -18,14 +18,14 @@ class Node
 Node(){} // Default Constructor
 };
 
-// O(N)
-
 int height(Node *root)
 {
     if(root==NULL) return 0;
     return 1 + height(root->left) + height(root->right);
 }
 
+
+// O(N^2)
 bool Check_For_Balanced_Tree(Node *root)
 {
     // 3 2 1

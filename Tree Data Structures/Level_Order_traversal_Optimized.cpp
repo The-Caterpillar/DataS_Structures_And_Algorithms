@@ -18,12 +18,21 @@ class Node
 Node(){} // Default Constructor
 };
 
-// O(N)
-int size(Node *root)
+void LTraversal(Node *root)
 {
-    if(root==NULL) return 0;
+    if(root==NULL) return;
+    queue<Node*> q;
+    q.push(root);
+    // 1 2 3
+    while(!q.empty())
+    {
+        Node *curr = q.front();
+        q.pop();
+        cout<<curr->key<<" ";
 
-    return 1 + size(root->left) + size(root->right);
+        if(curr->left!=NULL) q.push(curr->left);
+        if(curr->right!=NULL) q.push(curr->right);
+    }
 }
 int main()
 {
@@ -38,7 +47,7 @@ int main()
     cin>>data; root->right->left = new Node(data);
     cin>>data; root->right->right = new Node(data);
 
-    cout<<"Size: "<<size(root)<<endl;
+    LTraversal(root);
 
 return 0;
 }

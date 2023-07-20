@@ -1,4 +1,3 @@
-// level order traversal = Breadth First Search
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -18,13 +17,20 @@ class Node
 Node(){} // Default Constructor
 };
 
-// O(N)
-int size(Node *root)
+void print(Node *root, int distance)
 {
-    if(root==NULL) return 0;
+    if(root == NULL) return;
 
-    return 1 + size(root->left) + size(root->right);
+    if(distance==0)
+    {
+        cout<<root->key<<" ";
+    }
+    else{
+        print(root->left,distance-1);
+        print(root->right,distance-1);
+    }
 }
+
 int main()
 {
     cout<<"Enter the data: ";
@@ -38,7 +44,10 @@ int main()
     cin>>data; root->right->left = new Node(data);
     cin>>data; root->right->right = new Node(data);
 
-    cout<<"Size: "<<size(root)<<endl;
+    cout<<"Enter the distance: ";
+    int distance; cin>>distance;
+
+    print(root,distance);
 
 return 0;
 }

@@ -17,6 +17,15 @@ class Node
 Node(){} // Default Constructor
 };
 
+
+// Time Complexity: O(n)
+int height(Node *root)
+{
+    if(root==NULL) return 0;
+
+    else return max(height(root->left),height(root->right)) + 1;
+}
+
 int main()
 {
     int a; cin>>a;
@@ -29,8 +38,6 @@ int main()
     cin>>data; root->right->left = new Node(data);
     cin>>data; root->right->right = new Node(data);
 
-    cout<<"\n\n Height of tree= "<<endl;
-    cout<<height(root);
-
+    cout<<height(root)<<endl;
 return 0;
 }
